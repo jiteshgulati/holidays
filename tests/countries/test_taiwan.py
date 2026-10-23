@@ -355,6 +355,18 @@ class TestTaiwan(CommonCountryTests, WorkingDayTests, TestCase):
         self.assertHolidayName(f"{name}（補假）", obs_dts)
         self.assertNoNonObservedHoliday(obs_dts)
 
+    def test_childrens_day_and_tomb_sweeping_day_l10n(self):
+        obs_dts = (
+            "2020-04-02",
+            "2020-04-03",
+            "2037-04-02",
+            "2037-04-03",
+            "2048-04-02",
+            "2048-04-03",
+        )
+        for language in Taiwan.supported_languages:
+            self.assertHoliday(Taiwan(language=language, years=(2020, 2037, 2048)), obs_dts)
+
     def test_late_president_chiang_kai_sheks_memorial_day(self):
         name = "先總統蔣公逝世紀念日"
         self.assertNoHolidayName(name)
